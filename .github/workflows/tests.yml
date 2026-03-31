@@ -1,0 +1,56 @@
+name: Tests
+
+on:
+  push:
+    paths:
+      - "Module */**"
+      - "Tests/**"
+      - ".github/workflows/tests.yml"
+  pull_request:
+    paths:
+      - "Module */**"
+      - "Tests/**"
+      - ".github/workflows/tests.yml"
+  workflow_dispatch:
+
+jobs:
+  make-builds:
+    name: Exercise make builds
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Build every exercise with a Makefile
+        shell: bash
+        run: |
+          set -euo pipefail
+          while IFS= read -r -d '' makefile; do
+            dir=$(dirname "$makefile")
+            echo "::group::make -C $dir"
+            make -C "$dir"
+            echo "::endgroup::"
+          done < <(
+            find . -mindepth 2 -maxdepth 3 -type f -name Makefile -path "./Module */*/Makefile" -print0 | sort -z
+          )
+
+  tests:
+    name: Tests suite
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Configure Tests
+        working-directory: Tests
+        run: cmake -S . -B build
+
+      - name: Build Tests
+        working-directory: Tests
+        run: cmake --build build --parallel
+
+      - name: Run Tests
+        working-directory: Tests
+        run: ctest --test-dir build --output-on-failure

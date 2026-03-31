@@ -1,0 +1,9 @@
+ADD
+Ada
+Lovelace
+Enchantress
+123456
+Math secret
+SEARCH
+0
+EXIT

@@ -1,0 +1,25 @@
+# Exercise build artifacts
+Module */*/*.o
+
+# Exercise binaries
+Module 00/ex00/megaphone
+Module 00/ex01/phonebook
+Module 01/ex00/zombie
+Module 01/ex01/horde
+Module 01/ex02/brain
+Module 01/ex03/violence
+Module 01/ex04/replace
+Module 01/ex05/harl
+Module 01/ex05/output.txt
+Module 02/ex00/fixed
+Module 02/ex01/fixed
+Module 02/ex02/fixed
+Module 03/ex00/claptrap
+Module 03/ex01/scavtrap
+Module 03/ex02/fragtrap
+Module 04/ex00/animal
+Module 04/ex01/brain
+Module 04/ex02/abstract_animal
+
+# Shared test build output
+Tests/build/

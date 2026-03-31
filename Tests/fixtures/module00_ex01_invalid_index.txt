@@ -1,0 +1,9 @@
+ADD
+Alan
+Turing
+Ace
+987654
+Machines secret
+SEARCH
+9
+EXIT
