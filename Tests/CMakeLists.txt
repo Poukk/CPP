@@ -14,8 +14,7 @@ include(TestHarness)
 
 FetchContent_Declare(
   googletest
-  URL https://github.com/google/googletest/archive/refs/tags/v1.17.0.zip
-  DOWNLOAD_EXTRACT_TIMESTAMP TRUE
+  URL "https://github.com/google/googletest/archive/refs/tags/v1.17.0.zip"
 )
 FetchContent_MakeAvailable(googletest)
 
@@ -27,6 +26,9 @@ set(MODULE01_EX02_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../Module 01/ex02")
 set(MODULE01_EX03_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../Module 01/ex03")
 set(MODULE01_EX04_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../Module 01/ex04")
 set(MODULE01_EX05_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../Module 01/ex05")
+set(MODULE02_EX00_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../Module 02/ex00")
+set(MODULE02_EX01_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../Module 02/ex01")
+set(MODULE02_EX02_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../Module 02/ex02")
 
 add_cpp_exercise_app(module00_ex00_app "${MODULE00_EX00_DIR}"
   megaphone.cpp
@@ -100,6 +102,33 @@ add_cpp_exercise_library(module01_ex05_lib "${MODULE01_EX05_DIR}"
 add_cpp_exercise_app(module01_ex05_app "${MODULE01_EX05_DIR}"
   main.cpp
   Harl.cpp
+)
+
+add_cpp_exercise_library(module02_ex00_lib "${MODULE02_EX00_DIR}"
+  Fixed.cpp
+)
+
+add_cpp_exercise_app(module02_ex00_app "${MODULE02_EX00_DIR}"
+  main.cpp
+  Fixed.cpp
+)
+
+add_cpp_exercise_library(module02_ex01_lib "${MODULE02_EX01_DIR}"
+  Fixed.cpp
+)
+
+add_cpp_exercise_app(module02_ex01_app "${MODULE02_EX01_DIR}"
+  main.cpp
+  Fixed.cpp
+)
+
+add_cpp_exercise_library(module02_ex02_lib "${MODULE02_EX02_DIR}"
+  Fixed.cpp
+)
+
+add_cpp_exercise_app(module02_ex02_app "${MODULE02_EX02_DIR}"
+  main.cpp
+  Fixed.cpp
 )
 
 add_cpp_gtest_binary(module00_unit_tests
@@ -181,4 +210,62 @@ add_cpp_gtest_binary(module01_integration_tests
     MODULE01_EX03_APP_PATH="$<TARGET_FILE:module01_ex03_app>"
     MODULE01_EX04_APP_PATH="$<TARGET_FILE:module01_ex04_app>"
     MODULE01_EX05_APP_PATH="$<TARGET_FILE:module01_ex05_app>"
+)
+
+add_cpp_gtest_binary(module02_ex00_unit_tests
+  SOURCES
+    "${CMAKE_CURRENT_SOURCE_DIR}/support/stream_redirect.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/unit/module02_ex00_fixed_test.cpp"
+  LIBRARIES
+    module02_ex00_lib
+  INCLUDE_DIRS
+    "${MODULE02_EX00_DIR}"
+)
+
+add_cpp_gtest_binary(module02_ex00_integration_tests
+  SOURCES
+    "${CMAKE_CURRENT_SOURCE_DIR}/support/stream_redirect.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/integration/module02_ex00_fixed_test.cpp"
+  LIBRARIES
+    module02_ex00_lib
+  INCLUDE_DIRS
+    "${MODULE02_EX00_DIR}"
+)
+
+add_cpp_gtest_binary(module02_ex01_unit_tests
+  SOURCES
+    "${CMAKE_CURRENT_SOURCE_DIR}/support/stream_redirect.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/unit/module02_ex01_fixed_test.cpp"
+  LIBRARIES
+    module02_ex01_lib
+  INCLUDE_DIRS
+    "${MODULE02_EX01_DIR}"
+)
+
+add_cpp_gtest_binary(module02_ex01_integration_tests
+  SOURCES
+    "${CMAKE_CURRENT_SOURCE_DIR}/support/stream_redirect.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/integration/module02_ex01_fixed_test.cpp"
+  LIBRARIES
+    module02_ex01_lib
+  INCLUDE_DIRS
+    "${MODULE02_EX01_DIR}"
+)
+
+add_cpp_gtest_binary(module02_ex02_unit_tests
+  SOURCES
+    "${CMAKE_CURRENT_SOURCE_DIR}/unit/module02_ex02_fixed_test.cpp"
+  LIBRARIES
+    module02_ex02_lib
+  INCLUDE_DIRS
+    "${MODULE02_EX02_DIR}"
+)
+
+add_cpp_gtest_binary(module02_ex02_integration_tests
+  SOURCES
+    "${CMAKE_CURRENT_SOURCE_DIR}/integration/module02_ex02_fixed_test.cpp"
+  LIBRARIES
+    module02_ex02_lib
+  INCLUDE_DIRS
+    "${MODULE02_EX02_DIR}"
 )
