@@ -8,5 +8,5 @@ int main() {
     harl.complain("WARNING");
     harl.complain("ERROR");
     harl.complain("UNKNOWN");
-    return (0);
+    return 0;
 }

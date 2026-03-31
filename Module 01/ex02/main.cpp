@@ -7,10 +7,10 @@ int main() {
     std::string &stringREF = string;
 
     std::cout << "Memory address of original string: " << &string << std::endl;
-    std::cout << "Memory address held by stringPTR: " << stringPTR << std::endl;
-    std::cout << "Memory address held by stringREF: " << &stringREF << std::endl;
-
-    std::cout << "Value of original string: " << string << std::endl;
+    std::cout << "Memory address held by stringPTR:  " << stringPTR << std::endl;
+    std::cout << "Memory address held by stringREF:  " << &stringREF << std::endl;
+    std::cout << std::endl;
+    std::cout << "Value of original string:      " << string << std::endl;
     std::cout << "Value pointed to by stringPTR: " << *stringPTR << std::endl;
     std::cout << "Value pointed to by stringREF: " << stringREF << std::endl;
     return 0;

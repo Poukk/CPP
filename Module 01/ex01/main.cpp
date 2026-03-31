@@ -25,5 +25,5 @@ int main() {
               << std::endl;
     announceHorde(horde, hordeSize);
     delete[] horde;
-    return EXIT_SUCCESS;
+    return 0;
 }
