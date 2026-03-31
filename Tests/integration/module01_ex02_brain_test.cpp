@@ -1,5 +1,6 @@
 #include <gtest/gtest.h>
 
+#include <sstream>
 #include <string>
 #include <vector>
 
@@ -9,30 +10,31 @@ namespace {
 
 std::vector<std::string> split_lines(const std::string &text) {
     std::vector<std::string> lines;
-    std::string current;
+    std::istringstream stream(text);
+    std::string line;
 
-    for (std::string::size_type index = 0; index < text.size(); ++index) {
-        if (text[index] == '\n') {
-            lines.push_back(current);
-            current.clear();
-        } else {
-            current += text[index];
+    while (std::getline(stream, line)) {
+        if (line.find_first_not_of(' ') != std::string::npos) {
+            lines.push_back(line);
         }
-    }
-    if (!current.empty()) {
-        lines.push_back(current);
     }
     return lines;
 }
 
 std::string value_after_colon(const std::string &line) {
-    const std::string delimiter = ": ";
-    const std::string::size_type position = line.find(delimiter);
+    const std::string::size_type position = line.find(':');
 
     if (position == std::string::npos) {
         return "";
     }
-    return line.substr(position + delimiter.length());
+
+    const std::string value = line.substr(position + 1);
+    const std::string::size_type first_content = value.find_first_not_of(' ');
+
+    if (first_content == std::string::npos) {
+        return "";
+    }
+    return value.substr(first_content);
 }
 
 }  // namespace
