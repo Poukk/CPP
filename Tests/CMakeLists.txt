@@ -12,6 +12,8 @@ include(FetchContent)
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 include(TestHarness)
 
+find_program(VALGRIND_EXECUTABLE valgrind)
+
 FetchContent_Declare(
   googletest
   URL "https://github.com/google/googletest/archive/refs/tags/v1.17.0.zip"
@@ -32,6 +34,9 @@ set(MODULE02_EX02_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../Module 02/ex02")
 set(MODULE03_EX00_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../Module 03/ex00")
 set(MODULE03_EX01_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../Module 03/ex01")
 set(MODULE03_EX02_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../Module 03/ex02")
+set(MODULE04_EX00_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../Module 04/ex00")
+set(MODULE04_EX01_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../Module 04/ex01")
+set(MODULE04_EX02_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../Module 04/ex02")
 
 add_cpp_exercise_app(module00_ex00_app "${MODULE00_EX00_DIR}"
   megaphone.cpp
@@ -165,6 +170,53 @@ add_cpp_exercise_app(module03_ex02_app "${MODULE03_EX02_DIR}"
   ClapTrap.cpp
   ScavTrap.cpp
   FragTrap.cpp
+)
+
+add_cpp_exercise_library(module04_ex00_lib "${MODULE04_EX00_DIR}"
+  Animal.cpp
+  Dog.cpp
+  Cat.cpp
+  WrongAnimal.cpp
+  WrongCat.cpp
+)
+
+add_cpp_exercise_app(module04_ex00_app "${MODULE04_EX00_DIR}"
+  main.cpp
+  Animal.cpp
+  Dog.cpp
+  Cat.cpp
+  WrongAnimal.cpp
+  WrongCat.cpp
+)
+
+add_cpp_exercise_library(module04_ex01_lib "${MODULE04_EX01_DIR}"
+  Animal.cpp
+  Brain.cpp
+  Dog.cpp
+  Cat.cpp
+)
+
+add_cpp_exercise_app(module04_ex01_app "${MODULE04_EX01_DIR}"
+  main.cpp
+  Animal.cpp
+  Brain.cpp
+  Dog.cpp
+  Cat.cpp
+)
+
+add_cpp_exercise_library(module04_ex02_lib "${MODULE04_EX02_DIR}"
+  Animal.cpp
+  Brain.cpp
+  Dog.cpp
+  Cat.cpp
+)
+
+add_cpp_exercise_app(module04_ex02_app "${MODULE04_EX02_DIR}"
+  main.cpp
+  Animal.cpp
+  Brain.cpp
+  Dog.cpp
+  Cat.cpp
 )
 
 add_cpp_gtest_binary(module00_unit_tests
@@ -362,3 +414,79 @@ add_cpp_gtest_binary(module03_ex02_integration_tests
     MODULE03_EX02_APP_PATH="$<TARGET_FILE:module03_ex02_app>"
 )
 add_dependencies(module03_ex02_integration_tests module03_ex02_app)
+
+add_cpp_gtest_binary(module04_ex00_unit_tests
+  SOURCES
+    "${CMAKE_CURRENT_SOURCE_DIR}/support/stream_redirect.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/unit/module04_ex00_polymorphism_test.cpp"
+  LIBRARIES
+    module04_ex00_lib
+  INCLUDE_DIRS
+    "${MODULE04_EX00_DIR}"
+)
+
+add_cpp_gtest_binary(module04_ex00_integration_tests
+  SOURCES
+    "${CMAKE_CURRENT_SOURCE_DIR}/support/process_runner.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/integration/module04_ex00_polymorphism_test.cpp"
+  COMPILE_DEFINITIONS
+    MODULE04_EX00_APP_PATH="$<TARGET_FILE:module04_ex00_app>"
+)
+add_dependencies(module04_ex00_integration_tests module04_ex00_app)
+
+add_cpp_gtest_binary(module04_ex01_unit_tests
+  SOURCES
+    "${CMAKE_CURRENT_SOURCE_DIR}/support/stream_redirect.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/unit/module04_ex01_brain_test.cpp"
+  LIBRARIES
+    module04_ex01_lib
+  INCLUDE_DIRS
+    "${MODULE04_EX01_DIR}"
+)
+
+add_cpp_gtest_binary(module04_ex01_integration_tests
+  SOURCES
+    "${CMAKE_CURRENT_SOURCE_DIR}/support/process_runner.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/integration/module04_ex01_brain_test.cpp"
+  COMPILE_DEFINITIONS
+    MODULE04_EX01_APP_PATH="$<TARGET_FILE:module04_ex01_app>"
+)
+add_dependencies(module04_ex01_integration_tests module04_ex01_app)
+
+add_cpp_gtest_binary(module04_ex02_unit_tests
+  SOURCES
+    "${CMAKE_CURRENT_SOURCE_DIR}/support/stream_redirect.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/support/process_runner.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/support/temp_dir.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/unit/module04_ex02_abstract_test.cpp"
+  LIBRARIES
+    module04_ex02_lib
+  INCLUDE_DIRS
+    "${MODULE04_EX02_DIR}"
+  COMPILE_DEFINITIONS
+    MODULE04_EX02_DIR="${MODULE04_EX02_DIR}"
+)
+
+add_cpp_gtest_binary(module04_ex02_integration_tests
+  SOURCES
+    "${CMAKE_CURRENT_SOURCE_DIR}/support/process_runner.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/integration/module04_ex02_abstract_test.cpp"
+  COMPILE_DEFINITIONS
+    MODULE04_EX02_APP_PATH="$<TARGET_FILE:module04_ex02_app>"
+)
+add_dependencies(module04_ex02_integration_tests module04_ex02_app)
+
+add_cpp_gtest_binary(module04_compliance_tests
+  SOURCES
+    "${CMAKE_CURRENT_SOURCE_DIR}/support/process_runner.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/support/temp_dir.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/unit/module04_compliance_test.cpp"
+  COMPILE_DEFINITIONS
+    MODULE04_EX00_DIR="${MODULE04_EX00_DIR}"
+    MODULE04_EX01_DIR="${MODULE04_EX01_DIR}"
+    MODULE04_EX02_DIR="${MODULE04_EX02_DIR}"
+)
+
+add_valgrind_leak_test(module04_ex00_valgrind_leak_test module04_ex00_app)
+add_valgrind_leak_test(module04_ex01_valgrind_leak_test module04_ex01_app)
+add_valgrind_leak_test(module04_ex02_valgrind_leak_test module04_ex02_app)

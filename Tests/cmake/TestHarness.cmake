@@ -47,3 +47,20 @@ function(add_cpp_gtest_binary target)
 
   gtest_discover_tests(${target})
 endfunction()
+
+function(add_valgrind_leak_test name target)
+  if(NOT VALGRIND_EXECUTABLE)
+    return()
+  endif()
+
+  add_test(
+    NAME ${name}
+    COMMAND
+      "${VALGRIND_EXECUTABLE}"
+      --leak-check=full
+      --show-leak-kinds=all
+      --errors-for-leak-kinds=definite,indirect,possible
+      --error-exitcode=1
+      "$<TARGET_FILE:${target}>"
+  )
+endfunction()

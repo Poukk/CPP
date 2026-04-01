@@ -43,6 +43,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Install test dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y valgrind
+
       - name: Configure Tests
         working-directory: Tests
         run: cmake -S . -B build
