@@ -3,12 +3,11 @@
 
 Cat::Cat(void) {
   this->type = "Cat";
-  std::cout << "Cat default constructor: curious feline awakened"
-            << std::endl;
+  std::cout << "Cat default constructor" << std::endl;
 }
 
 Cat::Cat(const Cat &other) : Animal(other) {
-  std::cout << "Cat copy constructor: copied a " << this->type << std::endl;
+  std::cout << "Cat copy constructor" << std::endl;
 }
 
 Cat &Cat::operator=(const Cat &other) {
@@ -19,9 +18,9 @@ Cat &Cat::operator=(const Cat &other) {
 }
 
 Cat::~Cat(void) {
-  std::cout << "Cat destructor: the purring has stopped" << std::endl;
+  std::cout << "Cat destructor called" << std::endl;
 }
 
 void Cat::makeSound(void) const {
-  std::cout << "Cat sound: Meow meow!" << std::endl;
+  std::cout << "Meow meow!" << std::endl;
 }

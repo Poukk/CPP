@@ -3,13 +3,11 @@
 
 WrongCat::WrongCat(void) {
   this->type = "WrongCat";
-  std::cout << "WrongCat default constructor: misleading feline created"
-            << std::endl;
+  std::cout << "WrongCat default constructor" << std::endl;
 }
 
 WrongCat::WrongCat(const WrongCat &other) : WrongAnimal(other) {
-  std::cout << "WrongCat copy constructor: copied a " << this->type
-            << std::endl;
+  std::cout << "WrongCat copy constructor" << std::endl;
 }
 
 WrongCat &WrongCat::operator=(const WrongCat &other) {
@@ -19,11 +17,6 @@ WrongCat &WrongCat::operator=(const WrongCat &other) {
   return (*this);
 }
 
-WrongCat::~WrongCat(void) {
-  std::cout << "WrongCat destructor: misleading feline disappears"
-            << std::endl;
-}
+WrongCat::~WrongCat(void) { std::cout << "WrongCat destructor" << std::endl; }
 
-void WrongCat::makeSound(void) const {
-  std::cout << "WrongCat sound: Meow...?" << std::endl;
-}
+void WrongCat::makeSound(void) const { std::cout << "Meow...?" << std::endl; }

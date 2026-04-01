@@ -2,13 +2,11 @@
 #include <iostream>
 
 Animal::Animal(void) : type("Animal") {
-  std::cout << "Animal constructor: abstract animal base initialized"
-            << std::endl;
+  std::cout << "Animal default constructor" << std::endl;
 }
 
 Animal::Animal(const Animal &other) : type(other.type) {
-  std::cout << "Animal copy constructor: copied type " << this->type
-            << std::endl;
+  std::cout << "Animal copy constructor" << std::endl;
 }
 
 Animal &Animal::operator=(const Animal &other) {
@@ -18,9 +16,6 @@ Animal &Animal::operator=(const Animal &other) {
   return (*this);
 }
 
-Animal::~Animal(void) {
-  std::cout << "Animal destructor: abstract animal base destroyed"
-            << std::endl;
-}
+Animal::~Animal(void) { std::cout << "Animal destructor" << std::endl; }
 
 const std::string &Animal::getType(void) const { return (this->type); }

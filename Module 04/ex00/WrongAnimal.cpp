@@ -2,13 +2,11 @@
 #include <iostream>
 
 WrongAnimal::WrongAnimal(void) : type("WrongAnimal") {
-  std::cout << "WrongAnimal default constructor: confused creature appears"
-            << std::endl;
+  std::cout << "WrongAnimal default constructor" << std::endl;
 }
 
 WrongAnimal::WrongAnimal(const WrongAnimal &other) : type(other.type) {
-  std::cout << "WrongAnimal copy constructor: copied type " << this->type
-            << std::endl;
+  std::cout << "WrongAnimal copy constructor" << std::endl;
 }
 
 WrongAnimal &WrongAnimal::operator=(const WrongAnimal &other) {
@@ -19,12 +17,11 @@ WrongAnimal &WrongAnimal::operator=(const WrongAnimal &other) {
 }
 
 WrongAnimal::~WrongAnimal(void) {
-  std::cout << "WrongAnimal destructor: chaotic creature vanishes"
-            << std::endl;
+  std::cout << "WrongAnimal destructor called" << std::endl;
 }
 
 const std::string &WrongAnimal::getType(void) const { return (this->type); }
 
 void WrongAnimal::makeSound(void) const {
-  std::cout << "WrongAnimal sound: puzzling generic noise" << std::endl;
+  std::cout << "*wrong generic noise*" << std::endl;
 }

@@ -3,12 +3,11 @@
 
 Dog::Dog(void) {
   this->type = "Dog";
-  std::cout << "Dog default constructor: loyal companion created"
-            << std::endl;
+  std::cout << "Dog default constructor" << std::endl;
 }
 
 Dog::Dog(const Dog &other) : Animal(other) {
-  std::cout << "Dog copy constructor: copied a " << this->type << std::endl;
+  std::cout << "Dog copy constructor" << std::endl;
 }
 
 Dog &Dog::operator=(const Dog &other) {
@@ -18,10 +17,6 @@ Dog &Dog::operator=(const Dog &other) {
   return (*this);
 }
 
-Dog::~Dog(void) {
-  std::cout << "Dog destructor: the kennel is now empty" << std::endl;
-}
+Dog::~Dog(void) { std::cout << "Dog destructor called" << std::endl; }
 
-void Dog::makeSound(void) const {
-  std::cout << "Dog sound: Woof woof!" << std::endl;
-}
+void Dog::makeSound(void) const { std::cout << "Woof woof!" << std::endl; }

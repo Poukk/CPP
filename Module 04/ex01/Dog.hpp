@@ -5,19 +5,19 @@
 #include "Brain.hpp"
 
 class Dog : public Animal {
-  private:
-    Brain *brain;
+private:
+  Brain *brain;
 
-  public:
-    Dog(void);
-    Dog(const Dog &other);
-    Dog &operator=(const Dog &other);
-    ~Dog(void);
+public:
+  Dog(void);
+  Dog(const Dog &other);
+  Dog &operator=(const Dog &other);
+  ~Dog(void);
 
-    void makeSound(void) const;
-    void setIdea(int index, const std::string &idea);
-    const std::string &getIdea(int index) const;
-    const Brain *getBrain(void) const;
+  void makeSound(void) const;
+  void setIdea(int index, const std::string &idea);
+  const std::string &getIdea(int index) const;
+  const Brain *getBrain(void) const;
 };
 
 #endif

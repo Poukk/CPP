@@ -4,17 +4,17 @@
 #include <string>
 
 class Animal {
-  protected:
-    std::string type;
+protected:
+  std::string type;
 
-  public:
-    Animal(void);
-    Animal(const Animal &other);
-    Animal &operator=(const Animal &other);
-    virtual ~Animal(void);
+public:
+  Animal(void);
+  Animal(const Animal &other);
+  Animal &operator=(const Animal &other);
+  virtual ~Animal(void);
 
-    const std::string &getType(void) const;
-    virtual void makeSound(void) const;
+  const std::string &getType(void) const;
+  virtual void makeSound(void) const;
 };
 
 #endif

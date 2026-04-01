@@ -2,13 +2,11 @@
 #include <iostream>
 
 Animal::Animal(void) : type("Animal") {
-  std::cout << "Animal default constructor: base creature created"
-            << std::endl;
+  std::cout << "Animal default constructor" << std::endl;
 }
 
 Animal::Animal(const Animal &other) : type(other.type) {
-  std::cout << "Animal copy constructor: copied type " << this->type
-            << std::endl;
+  std::cout << "Animal copy constructor" << std::endl;
 }
 
 Animal &Animal::operator=(const Animal &other) {
@@ -18,12 +16,10 @@ Animal &Animal::operator=(const Animal &other) {
   return (*this);
 }
 
-Animal::~Animal(void) {
-  std::cout << "Animal destructor: base creature destroyed" << std::endl;
-}
+Animal::~Animal(void) { std::cout << "Animal destructor" << std::endl; }
 
 const std::string &Animal::getType(void) const { return (this->type); }
 
 void Animal::makeSound(void) const {
-  std::cout << "Animal sound: undefined creature noise" << std::endl;
+  std::cout << "*generic animal noises*" << std::endl;
 }

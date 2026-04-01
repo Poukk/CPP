@@ -3,12 +3,11 @@
 
 Dog::Dog(void) : brain(new Brain()) {
   this->type = "Dog";
-  std::cout << "Dog default constructor: watchdog and brain allocated"
-            << std::endl;
+  std::cout << "Dog default constructor" << std::endl;
 }
 
 Dog::Dog(const Dog &other) : Animal(other), brain(new Brain(*other.brain)) {
-  std::cout << "Dog copy constructor: deep-copied dog brain" << std::endl;
+  std::cout << "Dog copy constructor" << std::endl;
 }
 
 Dog &Dog::operator=(const Dog &other) {
@@ -22,10 +21,10 @@ Dog &Dog::operator=(const Dog &other) {
 
 Dog::~Dog(void) {
   delete this->brain;
-  std::cout << "Dog destructor: dog brain deleted" << std::endl;
+  std::cout << "Dog destructor called" << std::endl;
 }
 
-void Dog::makeSound(void) const { std::cout << "Dog sound: Woof!" << std::endl; }
+void Dog::makeSound(void) const { std::cout << "Woof woof!" << std::endl; }
 
 void Dog::setIdea(int index, const std::string &idea) {
   this->brain->setIdea(index, idea);
