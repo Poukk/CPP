@@ -29,6 +29,9 @@ set(MODULE01_EX05_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../Module 01/ex05")
 set(MODULE02_EX00_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../Module 02/ex00")
 set(MODULE02_EX01_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../Module 02/ex01")
 set(MODULE02_EX02_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../Module 02/ex02")
+set(MODULE03_EX00_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../Module 03/ex00")
+set(MODULE03_EX01_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../Module 03/ex01")
+set(MODULE03_EX02_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../Module 03/ex02")
 
 add_cpp_exercise_app(module00_ex00_app "${MODULE00_EX00_DIR}"
   megaphone.cpp
@@ -129,6 +132,39 @@ add_cpp_exercise_library(module02_ex02_lib "${MODULE02_EX02_DIR}"
 add_cpp_exercise_app(module02_ex02_app "${MODULE02_EX02_DIR}"
   main.cpp
   Fixed.cpp
+)
+
+add_cpp_exercise_library(module03_ex00_lib "${MODULE03_EX00_DIR}"
+  ClapTrap.cpp
+)
+
+add_cpp_exercise_app(module03_ex00_app "${MODULE03_EX00_DIR}"
+  main.cpp
+  ClapTrap.cpp
+)
+
+add_cpp_exercise_library(module03_ex01_lib "${MODULE03_EX01_DIR}"
+  ClapTrap.cpp
+  ScavTrap.cpp
+)
+
+add_cpp_exercise_app(module03_ex01_app "${MODULE03_EX01_DIR}"
+  main.cpp
+  ClapTrap.cpp
+  ScavTrap.cpp
+)
+
+add_cpp_exercise_library(module03_ex02_lib "${MODULE03_EX02_DIR}"
+  ClapTrap.cpp
+  ScavTrap.cpp
+  FragTrap.cpp
+)
+
+add_cpp_exercise_app(module03_ex02_app "${MODULE03_EX02_DIR}"
+  main.cpp
+  ClapTrap.cpp
+  ScavTrap.cpp
+  FragTrap.cpp
 )
 
 add_cpp_gtest_binary(module00_unit_tests
@@ -269,3 +305,60 @@ add_cpp_gtest_binary(module02_ex02_integration_tests
   INCLUDE_DIRS
     "${MODULE02_EX02_DIR}"
 )
+
+add_cpp_gtest_binary(module03_ex00_unit_tests
+  SOURCES
+    "${CMAKE_CURRENT_SOURCE_DIR}/support/stream_redirect.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/unit/module03_ex00_claptrap_test.cpp"
+  LIBRARIES
+    module03_ex00_lib
+  INCLUDE_DIRS
+    "${MODULE03_EX00_DIR}"
+)
+
+add_cpp_gtest_binary(module03_ex00_integration_tests
+  SOURCES
+    "${CMAKE_CURRENT_SOURCE_DIR}/support/process_runner.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/integration/module03_ex00_claptrap_test.cpp"
+  COMPILE_DEFINITIONS
+    MODULE03_EX00_APP_PATH="$<TARGET_FILE:module03_ex00_app>"
+)
+add_dependencies(module03_ex00_integration_tests module03_ex00_app)
+
+add_cpp_gtest_binary(module03_ex01_unit_tests
+  SOURCES
+    "${CMAKE_CURRENT_SOURCE_DIR}/support/stream_redirect.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/unit/module03_ex01_scavtrap_test.cpp"
+  LIBRARIES
+    module03_ex01_lib
+  INCLUDE_DIRS
+    "${MODULE03_EX01_DIR}"
+)
+
+add_cpp_gtest_binary(module03_ex01_integration_tests
+  SOURCES
+    "${CMAKE_CURRENT_SOURCE_DIR}/support/process_runner.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/integration/module03_ex01_scavtrap_test.cpp"
+  COMPILE_DEFINITIONS
+    MODULE03_EX01_APP_PATH="$<TARGET_FILE:module03_ex01_app>"
+)
+add_dependencies(module03_ex01_integration_tests module03_ex01_app)
+
+add_cpp_gtest_binary(module03_ex02_unit_tests
+  SOURCES
+    "${CMAKE_CURRENT_SOURCE_DIR}/support/stream_redirect.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/unit/module03_ex02_fragtrap_test.cpp"
+  LIBRARIES
+    module03_ex02_lib
+  INCLUDE_DIRS
+    "${MODULE03_EX02_DIR}"
+)
+
+add_cpp_gtest_binary(module03_ex02_integration_tests
+  SOURCES
+    "${CMAKE_CURRENT_SOURCE_DIR}/support/process_runner.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/integration/module03_ex02_fragtrap_test.cpp"
+  COMPILE_DEFINITIONS
+    MODULE03_EX02_APP_PATH="$<TARGET_FILE:module03_ex02_app>"
+)
+add_dependencies(module03_ex02_integration_tests module03_ex02_app)
